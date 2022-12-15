@@ -1,7 +1,10 @@
 from moviepy.editor import VideoFileClip, clips_array, vfx
-clip1 = VideoFileClip("test_vid_src_01.mp4").margin(10).resize(width=640, height=360) # add 10px contour
-clip2 = clip1.fx( vfx.mirror_x)
-clip3 = clip1.fx( vfx.mirror_y)
-final_clip = clips_array([[clip1, clip2],
-                          [clip3]])
-final_clip.write_videofile("my_stack.mp4")
+
+clip1 = VideoFileClip("test_vid_src_01.mp4").resize(width=320, height=180)
+def scroll(get_frame, t):
+    frame = get_frame(t)
+    frame_region = frame[:,:,[0,2,1]]
+    return frame_region
+modifiedClip = clip1.fl( scroll )
+modifiedClip.preview()
+#modifiedClip.write_videofile("my_stack.mp4")
