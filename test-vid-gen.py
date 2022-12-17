@@ -15,7 +15,7 @@ def scroll(get_frame, t):
         fill_color=QRcolor, back_color="white").resize((64, 64), Image.NEAREST).convert('RGB')
     qrimg_arr = numpy.asarray(QRimg);
     frame = get_frame(t)
-    frame[32:96,32:96,:] = qrimg_arr[:,:,:]
+    frame[640-64:640,360-64:360,:] = qrimg_arr[:,:,:]
     return frame
 modifiedClip = clip1.fl( scroll )
 modifiedClip.preview()
