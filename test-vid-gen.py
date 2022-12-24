@@ -18,6 +18,8 @@ parser.add_argument('height', metavar='out_height', nargs='?', type=int, default
 
 args = parser.parse_args()
 
+qrcode_margin = 8
+
 clip1 = VideoFileClip("test_vid_src_01.mp4").resize(width=args.width, height=args.height)
 def scroll(get_frame, t):
     QRcode = qrcode.QRCode(
@@ -30,7 +32,7 @@ def scroll(get_frame, t):
         fill_color=QRcolor, back_color="white").resize((64, 64), Image.NEAREST).convert('RGB')
     qrimg_arr = numpy.asarray(QRimg);
     frame = get_frame(t)
-    frame[args.height-64-32:args.height-32,args.width-64-32:args.width-32,:] = qrimg_arr[:,:,:]
+    frame[args.height-64-qrcode_margin:args.height-qrcode_margin,args.width-64-32:args.width-32,:] = qrimg_arr[:,:,:]
     return frame
 modifiedClip = clip1.fl( scroll )
 modifiedClip.preview()
