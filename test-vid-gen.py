@@ -4,13 +4,10 @@ import argparse
 from PIL import Image
 from moviepy.editor import VideoFileClip, clips_array, vfx
 
-parser_epilog = '\
--h for help.'
-
 parser = argparse.ArgumentParser(
             formatter_class=argparse.RawTextHelpFormatter,
             description='Script for generating test video',
-            epilog=parser_epilog)
+            )
 parser.add_argument('width', metavar='out_width', nargs='?', type=int, default=1280,
                     help='Width of output video')
 parser.add_argument('height', metavar='out_height', nargs='?', type=int, default=720,
